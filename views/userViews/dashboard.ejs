@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trackify - Architecture Hub</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-bg-light: #f8fafc;
+            --color-bg-card: #ffffff;
+            --color-primary: #10b981;
+            --color-secondary: #4f46e5;
+            --color-text-main: #0f172a;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--color-bg-light);
+            color: var(--color-text-main);
+        }
+
+        /* Custom Scrollbar configuration for sub-containers */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="h-screen flex overflow-hidden bg-slate-50">
+
+    <!-- ================================== narvbar ============================================= -->
+ <!-- nav bar -->
+    <%- include('../snippets/navbar.ejs') %>
+    <div class="flex-grow flex flex-col h-full overflow-hidden">
+        
+        <!-- DASHBOARD ACTION GLOBAL TOPBAR -->
+          <%- include('../snippets/topbar.ejs') %>
+
+        <main class="flex-grow p-6 overflow-y-auto custom-scrollbar space-y-6">
+            
+            <section class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="p-4 bg-white border border-slate-200/80 rounded-xl shadow-sm flex items-center justify-between">
+                    <div>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Total Allocation</p>
+                        <h3 class="text-xl font-extrabold text-slate-900 tracking-tight mt-0.5">₦250,000.00</h3>
+                        <span class="text-[10px] text-emerald-500 font-bold"><i class="fa-solid fa-arrow-up-long"></i> +12.4% This cycle</span>
+                    </div>
+                    <div class="p-3 bg-emerald-50 rounded-xl text-emerald-500"><i class="fa-solid fa-building-columns text-base"></i></div>
+                </div>
+                <div class="p-4 bg-white border border-slate-200/80 rounded-xl shadow-sm flex items-center justify-between">
+                    <div>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Spent Overhead</p>
+                        <h3 class="text-xl font-extrabold text-slate-900 tracking-tight mt-0.5">₦84,230.15</h3>
+                        <span class="text-[10px] text-indigo-500 font-bold"><i class="fa-solid fa-chart-line"></i> 33.6% Burn rate</span>
+                    </div>
+                    <div class="p-3 bg-indigo-50 rounded-xl text-indigo-500"><i class="fa-solid fa-money-bill-transfer text-base"></i></div>
+                </div>
+                <div class="p-4 bg-white border border-slate-200/80 rounded-xl shadow-sm flex items-center justify-between">
+                    <div>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Remaining Float</p>
+                        <h3 class="text-xl font-extrabold text-slate-900 tracking-tight mt-0.5">₦165,769.85</h3>
+                        <span class="text-[10px] text-slate-500 font-bold"><i class="fa-solid fa-shield-halved"></i> Stable configuration</span>
+                    </div>
+                    <div class="p-3 bg-slate-100 rounded-xl text-slate-600"><i class="fa-solid fa-vault text-base"></i></div>
+                </div>
+            </section>
+
+            <section class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+                
+                <div class="lg:col-span-3 p-5 bg-white border border-slate-200/80 rounded-xl shadow-sm flex flex-col justify-between h-80">
+                    <div class="mb-2">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-xs font-bold text-slate-900 uppercase tracking-wide">Active Budget Thresholds</h3>
+                            <span class="text-[9px] bg-amber-50 text-amber-600 border border-amber-200 px-2 py-0.5 rounded-md font-bold uppercase tracking-wide animate-pulse">
+                                <i class="fa-solid fa-triangle-exclamation mr-1"></i> Cap Warnings Active
+                            </span>
+                        </div>
+                        <p class="text-[11px] text-slate-400">Current allocation ceilings vs realistic resource drain</p>
+                    </div>
+
+                    <div class="flex-grow overflow-y-auto custom-scrollbar space-y-4 pr-1 mt-2">
+                        
+                        <div class="space-y-1.5">
+                            <div class="flex justify-between items-center text-xs">
+                                <span class="font-bold text-slate-700 flex items-center gap-1.5"><i class="fa-solid fa-book text-indigo-500 text-[10px]"></i> Academic & Research Materials</span>
+                                <span class="text-slate-500 font-medium"><span class="text-slate-900 font-bold">₦35,000</span> / ₦50,000</span>
+                            </div>
+                            <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                                <div class="bg-indigo-500 h-full rounded-full transition-all duration-500" style="width: 70%"></div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-1.5">
+                            <div class="flex justify-between items-center text-xs">
+                                <span class="font-bold text-slate-700 flex items-center gap-1.5"><i class="fa-solid fa-burger text-amber-500 text-[10px]"></i> Food & Subsistence Utilities</span>
+                                <span class="text-amber-600 font-bold"><i class="fa-solid fa-circle-exclamation mr-0.5"></i> ₦28,400 <span class="text-slate-400 font-normal">/ ₦30,000</span></span>
+                            </div>
+                            <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                                <div class="bg-amber-500 h-full rounded-full transition-all duration-500" style="width: 94.6%"></div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-1.5">
+                            <div class="flex justify-between items-center text-xs">
+                                <span class="font-bold text-slate-700 flex items-center gap-1.5"><i class="fa-solid fa-wifi text-emerald-500 text-[10px]"></i> Network & Infrastructure Labs</span>
+                                <span class="text-slate-500 font-medium"><span class="text-slate-900 font-bold">₦12,000</span> / ₦40,000</span>
+                            </div>
+                            <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                                <div class="bg-emerald-500 h-full rounded-full transition-all duration-500" style="width: 30%"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="lg:col-span-2 p-5 bg-white border border-slate-200/80 rounded-xl shadow-sm flex flex-col justify-between h-80">
+                    <div class="mb-3">
+                        <h3 class="text-xs font-bold text-slate-900 uppercase tracking-wide">Recent Ledger Logs</h3>
+                        <p class="text-[11px] text-slate-400">Latest structural changes written to database</p>
+                    </div>
+
+                    <div class="flex-grow overflow-y-auto custom-scrollbar space-y-2.5 pr-1">
+                        <div class="flex items-center justify-between p-2 rounded-lg bg-slate-50/80 border border-slate-100">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-500 flex items-center justify-center text-xs"><i class="fa-solid fa-burger"></i></div>
+                                <div>
+                                    <h5 class="text-xs font-bold text-slate-800 leading-none">Campus Cafe</h5>
+                                    <span class="text-[9px] text-slate-400 font-medium">Food & Subsist</span>
+                                </div>
+                            </div>
+                            <span class="text-xs font-bold text-slate-900">-₦3,400</span>
+                        </div>
+                        <div class="flex items-center justify-between p-2 rounded-lg bg-slate-50/80 border border-slate-100">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-7 h-7 rounded-lg bg-indigo-50 text-indigo-500 flex items-center justify-center text-xs"><i class="fa-solid fa-book"></i></div>
+                                <div>
+                                    <h5 class="text-xs font-bold text-slate-800 leading-none">Research Materials</h5>
+                                    <span class="text-[9px] text-slate-400 font-medium">Academic Unit</span>
+                                </div>
+                            </div>
+                            <span class="text-xs font-bold text-slate-900">-₦12,500</span>
+                        </div>
+                        <div class="flex items-center justify-between p-2 rounded-lg bg-slate-50/80 border border-slate-100">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-7 h-7 rounded-lg bg-slate-100 text-slate-500 flex items-center justify-center text-xs"><i class="fa-solid fa-bolt"></i></div>
+                                <div>
+                                    <h5 class="text-xs font-bold text-slate-800 leading-none">Server Instance</h5>
+                                    <span class="text-[9px] text-slate-400 font-medium">Infrastructure</span>
+                                </div>
+                            </div>
+                            <span class="text-xs font-bold text-slate-900">-₦8,100</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="h-10 border-t border-slate-200/80 bg-white px-6 flex items-center justify-between text-slate-400 text-[10px] shrink-0">
+            <p>&copy; 2026 Trackify Workspace Layer.</p>
+            <p class="font-medium">System Version: v2.1.0-prod</p>
+        </footer>
+    </div>
+
+    <script src="/js/toggle_nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<header class="h-16 bg-white border-b border-slate-200/80 px-6 flex items-center justify-between shrink-0">
+    <div class="flex items-center gap-3">
+        <!-- Added id="mobile-menu-btn" for interaction tracking -->
+        <button id="mobile-menu-btn" class="md:hidden text-slate-600 hover:text-slate-900 focus:outline-none cursor-pointer">
+            <i class="fa-solid fa-bars text-lg"></i>
+        </button>
+        <h2 class="text-sm font-bold text-slate-800 tracking-tight flex items-center gap-2">
+            <i class="fa-solid fa-laptop-code text-indigo-500"></i> Status: <span class="text-emerald-500 font-extrabold">Active</span>
+        </h2>
+    </div>
+    
+    <div class="flex items-center gap-4">
+        <div class="text-right hidden sm:block">
+            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">System Date</p>
+            <p class="text-xs font-bold text-slate-700">
+                <%= new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) %>
+            </p>
+        </div>
+        <button onclick="alert('Action execution frame triggered.')" class="bg-[#10b981] hover:bg-[#059669] text-white text-xs font-bold px-3.5 py-2 rounded-lg transition-all flex items-center gap-1.5 shadow-sm">
+            <i class="fa-solid fa-plus"></i> New Transaction
+        </button>
+    </div>
+</header>

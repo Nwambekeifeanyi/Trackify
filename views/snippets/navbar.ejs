@@ -1,0 +1,53 @@
+<!-- Added id="sidebar-container" and updated responsive viewport classes -->
+<aside id="sidebar-container" class="w-64 bg-white border-r border-slate-200/80 flex flex-col justify-between shrink-0 h-full fixed md:sticky top-0 left-0 z-50 -translate-x-full md:translate-x-0 transition-transform duration-300 md:flex">
+    <div class="p-6">
+        <div class="flex items-center justify-between mb-8">
+            <a href="#" class="flex items-center gap-2">
+                <div class="bg-gradient-to-tr from-[#10b981] to-[#4f46e5] p-2 rounded-xl shadow-sm">
+                    <i class="fa-solid fa-wallet text-base text-white"></i>
+                </div>
+                <span class="text-xl font-extrabold tracking-tight text-slate-900">Track<span class="text-[#10b981]">ify.</span></span>
+            </a>
+            <!-- Mobile-only Close Trigger Button -->
+            <button id="mobile-close-btn" class="md:hidden text-slate-400 hover:text-slate-600 focus:outline-none cursor-pointer">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+        </div>
+
+        <nav class="space-y-1">
+            <a href="dashboard  " class="flex items-center gap-3 px-4 py-2.5 bg-slate-50 text-[#10b981] font-bold text-xs rounded-xl transition-all border border-slate-100">
+                <i class="fa-solid fa-chart-pie text-sm"></i> Main Analytics
+            </a>
+            <a href="income-logs" class="flex items-center gap-3 px-4 py-2.5 text-slate-600 hover:text-slate-900 hover:bg-slate-50 font-semibold text-xs rounded-xl transition-all">
+                <i class="fa-solid fa-wallet text-sm text-slate-400"></i> Income Logs
+            </a>
+            <a href="expense-logs" class="flex items-center gap-3 px-4 py-2.5 text-slate-600 hover:text-slate-900 hover:bg-slate-50 font-semibold text-xs rounded-xl transition-all">
+                <i class="fa-solid fa-receipt text-sm text-slate-400"></i> Expense Logs
+            </a>
+            <a href="campus-ledger" class="flex items-center gap-3 px-4 py-2.5 text-slate-600 hover:text-slate-900 hover:bg-slate-50 font-semibold text-xs rounded-xl transition-all">
+                <i class="fa-solid fa-graduation-cap text-sm text-slate-400"></i> Campus Ledger
+            </a>
+            <a href="add-income" class="flex items-center gap-3 px-4 py-2.5 text-slate-600 hover:text-slate-900 hover:bg-slate-50 font-semibold text-xs rounded-xl transition-all">
+                <i class="fa-solid fa-circle-plus text-sm text-slate-400"></i> New Transaction
+            </a>
+        </nav>
+    </div>
+
+    <div class="p-4 border-t border-slate-100 bg-slate-50/60 m-4 rounded-xl flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-[#10b981] to-[#4f46e5] flex items-center justify-center font-extrabold text-white text-xs shadow-sm">
+                JD
+            </div>
+            <div>
+                <h4 class="text-xs font-bold text-slate-800 leading-none">John Doe</h4>
+                <span class="text-[10px] text-slate-400 font-medium">Developer Hub</span>
+            </div>
+        </div>
+        <a href="#" class="text-slate-400 hover:text-red-500 transition-colors">
+            <i class="fa-solid fa-arrow-right-from-bracket text-xs"></i>
+        </a>
+    </div>
+</aside>
+
+<!-- Optional backdrop overlay to click away on mobile layout -->
+<div id="sidebar-overlay" class="fixed inset-0 bg-slate-900/30 backdrop-blur-xs z-40 hidden md:hidden transition-opacity duration-300"></div>

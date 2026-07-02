@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trackify - Smart Student Expense Architecture</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --color-bg-light: #f8fafc; /* Crisp Slate Light background */
+            --color-bg-card: #ffffff; /* Pure white for containers */
+            --color-primary: #10b981; /* Emerald Money Green */
+            --color-secondary: #4f46e5; /* Refined Indigo Accent */
+            --color-text-main: #0f172a; /* Deep Slate/Charcoal for text */
+            --color-text-muted: #475569;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--color-bg-light);
+            color: var(--color-text-main);
+            overflow-x: hidden;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(15, 23, 42, 0.06);
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="fixed top-0 left-0 w-full z-50 glass transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center gap-2">
+                    <div class="bg-gradient-to-tr from-[#10b981] to-[#4f46e5] p-2.5 rounded-xl shadow-md">
+                        <i class="fa-solid fa-wallet text-xl text-white"></i>
+                    </div>
+                    <span class="text-2xl font-extrabold tracking-tight text-slate-900">Track<span class="text-[#10b981]">ify.</span></span>
+                </div>
+
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-slate-600 hover:text-[#10b981] font-semibold transition-colors">Home</a>
+                    <a href="#about" class="text-slate-600 hover:text-[#10b981] font-semibold transition-colors">About</a>
+                    <a href="#features" class="text-slate-600 hover:text-[#10b981] font-semibold transition-colors">Features</a>
+                    <a href="#testimonials" class="text-slate-600 hover:text-[#10b981] font-semibold transition-colors">Testimonials</a>
+                    <a href="#contact" class="text-slate-600 hover:text-[#10b981] font-semibold transition-colors">Contact</a>
+                </div>
+
+                <div class="hidden md:flex items-center">
+                    <a href="login" class="bg-[#10b981] hover:bg-[#059669] text-white font-semibold px-5 py-2.5 rounded-xl transition-all shadow-md shadow-emerald-500/10">Get Started</a>
+                </div>
+
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-slate-600 hover:text-slate-900 p-2 rounded-lg transition-colors">
+                        <i class="fa-solid fa-bars text-2xl" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden glass border-t border-slate-200 absolute w-full left-0 transition-all duration-300">
+            <div class="px-4 pt-4 pb-6 space-y-3 shadow-xl bg-white/95">
+                <a href="#home" class="block px-3 py-2.5 rounded-xl text-slate-700 hover:bg-slate-100 hover:text-[#10b981] font-medium">Home</a>
+                <a href="#about" class="block px-3 py-2.5 rounded-xl text-slate-700 hover:bg-slate-100 hover:text-[#10b981] font-medium">About</a>
+                <a href="#features" class="block px-3 py-2.5 rounded-xl text-slate-700 hover:bg-slate-100 hover:text-[#10b981] font-medium">Features</a>
+                <a href="#testimonials" class="block px-3 py-2.5 rounded-xl text-slate-700 hover:bg-slate-100 hover:text-[#10b981] font-medium">Testimonials</a>
+                <a href="#contact" class="block px-3 py-2.5 rounded-xl text-slate-700 hover:bg-slate-100 hover:text-[#10b981] font-medium">Contact</a>
+                <hr class="border-slate-200 my-2">
+                <a href="#contact" class="block text-center w-full bg-[#10b981] text-white font-semibold px-4 py-3 rounded-xl shadow-md">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="relative pt-36 pb-24 md:pt-48 md:pb-32 flex items-center justify-center overflow-hidden bg-gradient-to-b from-slate-50 to-[#f8fafc]">
+        <div class="absolute top-1/4 left-1/4 w-80 h-80 bg-emerald-500/5 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-500/5 rounded-full blur-[150px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50 text-xs font-bold tracking-wide text-[#10b981] border border-emerald-200 mb-6 uppercase">
+                ⚡ Simplify Student Finance
+            </span>
+            <h1 data-aos="fade-up" class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900 mb-6 leading-tight">
+                Smart Budgeting for the <br><span class="bg-clip-text text-transparent bg-gradient-to-r from-[#10b981] to-[#4f46e5]">Modern Day Student</span>
+            </h1>
+            <p data-aos="fade-up" data-aos-delay="100" class="max-w-2xl mx-auto text-base sm:text-lg text-slate-600 mb-10">
+                Track logs, schedule categorical allowances, curb excessive impulse leaks, and construct clean balance sheets instantly on campus.
+            </p>
+            <div data-aos="fade-up" data-aos-delay="200" class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#features" class="w-full sm:w-auto bg-[#10b981] hover:bg-[#059669] text-white font-bold px-8 py-4 rounded-xl transition-all shadow-lg shadow-emerald-500/20 text-center">
+                    Explore App Core
+                </a>
+                <a href="#contact" class="w-full sm:w-auto bg-white hover:bg-slate-50 text-slate-800 font-semibold px-8 py-4 rounded-xl transition-all border border-slate-200 shadow-sm text-center">
+                    Get Free Access
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-20 bg-white border-y border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div data-aos="fade-right" class="p-6 rounded-3xl bg-slate-50 border border-slate-200 shadow-xl">
+                    <div class="flex justify-between items-center pb-4 border-b border-slate-200 mb-4">
+                        <span class="text-sm font-bold text-slate-700">Live Campus Balance Monitor</span>
+                        <span class="text-xs font-semibold text-[#10b981] flex items-center gap-1">
+                            <span class="w-2 h-2 rounded-full bg-[#10b981] inline-block animate-pulse"></span> Active
+                        </span>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center bg-white p-3 rounded-xl border border-slate-100 shadow-sm">
+                            <span class="text-sm text-slate-600 font-medium"><i class="fa-solid fa-burger text-amber-500 mr-2"></i> Fast Food / Snacks</span>
+                            <span class="text-sm font-bold text-rose-500">-$14.25</span>
+                        </div>
+                        <div class="flex justify-between items-center bg-white p-3 rounded-xl border border-slate-100 shadow-sm">
+                            <span class="text-sm text-slate-600 font-medium"><i class="fa-solid fa-book text-blue-500 mr-2"></i> Handouts & Stationary</span>
+                            <span class="text-sm font-bold text-rose-500">-$35.00</span>
+                        </div>
+                        <div class="flex justify-between items-center bg-white p-3 rounded-xl border border-slate-100 shadow-sm">
+                            <span class="text-sm text-slate-600 font-medium"><i class="fa-solid fa-wifi text-purple-500 mr-2"></i> Internet Data Plan</span>
+                            <span class="text-sm font-bold text-emerald-500">+$20.00</span>
+                        </div>
+                    </div>
+                </div>
+                <div data-aos="fade-left" class="space-y-6">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">Why We Built Trackify</h2>
+                    <p class="text-slate-600 text-base leading-relaxed">
+                        Being a student means managing multiple priorities—and often, limited income. Trackify was developed as a comprehensive Final Year Computer Science framework explicitly calculated to resolve campus financial stress. 
+                    </p>
+                    <p class="text-slate-600 text-base leading-relaxed">
+                        By deploying structured transaction ledgers and automated threshold reminders, Trackify instantly trains you to master budgeting patterns early.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 data-aos="fade-up" class="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Core System Architecture</h2>
+                <p data-aos="fade-up" data-aos-delay="100" class="text-slate-600 text-base sm:text-lg">Engineered securely using the modern full-stack web pipeline to keep processing instant.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div data-aos="fade-up" class="p-8 rounded-2xl bg-white border border-slate-200 hover:border-emerald-500/40 hover:shadow-lg transition-all group">
+                    <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-emerald-50 text-[#10b981] group-hover:bg-[#10b981] group-hover:text-white transition-all text-xl mb-6 shadow-sm">
+                        <i class="fa-solid fa-money-bill-transfer"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Dual Income & Expense Tracker</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Log recurring stipends alongside daily outflows instantly. Tag data cleanly into structural categories like Transport, Utilities, or Entertainment.</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="100" class="p-8 rounded-2xl bg-white border border-slate-200 hover:border-indigo-500/40 hover:shadow-lg transition-all group">
+                    <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-indigo-50 text-[#4f46e5] group-hover:bg-[#4f46e5] group-hover:text-white transition-all text-xl mb-6 shadow-sm">
+                        <i class="fa-solid fa-bell"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Live Threshold Alerts</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Receive instant system signals when your spending trends dangerously close to preset weekly boundaries or critically low overall margins.</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="200" class="p-8 rounded-2xl bg-white border border-slate-200 hover:border-emerald-500/40 hover:shadow-lg transition-all group">
+                    <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-emerald-50 text-[#10b981] group-hover:bg-[#10b981] group-hover:text-white transition-all text-xl mb-6 shadow-sm">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Analytical Charting</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Visualize cashflows through dynamic visual modules. Gain a comprehensive understanding of exact spending habits at a glance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="py-20 bg-white border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 data-aos="fade-up" class="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Praised By Campus Users</h2>
+                <p data-aos="fade-up" data-aos-delay="100" class="text-slate-600 text-base">See how actual college students are transforming their financial habits with Trackify.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div data-aos="fade-up" class="p-8 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between shadow-sm">
+                    <p class="text-slate-600 italic text-sm leading-relaxed mb-6">
+                        "As a polytechnic student managing off-campus lodge fees and feeding, I used to run completely broke by mid-semester. Trackify's category constraints forced real discipline onto me."
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-emerald-400 to-indigo-500 flex items-center justify-center font-bold text-white text-xs shadow-sm">EO</div>
+                        <div>
+                            <h4 class="text-sm font-bold text-slate-900">Emmanuel O.</h4>
+                            <span class="text-xs text-slate-500 font-medium">Computer Science Student</span>
+                        </div>
+                    </div>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="100" class="p-8 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between shadow-sm">
+                    <p class="text-slate-600 italic text-sm leading-relaxed mb-6">
+                        "The chart interfaces make data visualization so effortless. I can see immediately how much mobile data costs are impacting my allowance every week."
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-purple-400 to-pink-500 flex items-center justify-center font-bold text-white text-xs shadow-sm">AA</div>
+                        <div>
+                            <h4 class="text-sm font-bold text-slate-900">Amina A.</h4>
+                            <span class="text-xs text-slate-500 font-medium">Engineering Undergraduate</span>
+                        </div>
+                    </div>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="200" class="p-8 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between shadow-sm">
+                    <p class="text-slate-600 italic text-sm leading-relaxed mb-6">
+                        "The instant notifications whenever I exceed my entertainment parameters completely changed how I plan out weekends. This is an incredible tool."
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-400 to-teal-500 flex items-center justify-center font-bold text-white text-xs shadow-sm">DK</div>
+                        <div>
+                            <h4 class="text-sm font-bold text-slate-900">David K.</h4>
+                            <span class="text-xs text-slate-500 font-medium">Accounting Major</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 bg-slate-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 data-aos="fade-up" class="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Let's Connect</h2>
+                <p data-aos="fade-up" data-aos-delay="100" class="text-slate-600 text-sm sm:text-base">Have inquiries regarding the design, system source files, or backend integration endpoints?</p>
+            </div>
+
+            <div data-aos="fade-up" data-aos-delay="200" class="p-8 sm:p-10 rounded-3xl bg-white border border-slate-200 shadow-xl">
+                <form class="space-y-6" onsubmit="event.preventDefault(); alert('Message simulation successful!');">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold text-slate-700 uppercase tracking-wide">Your Name</label>
+                            <input type="text" placeholder="John Doe" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:border-[#10b981] focus:bg-white transition-colors" required>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold text-slate-700 uppercase tracking-wide">Student Email</label>
+                            <input type="email" placeholder="johndoe@student.edu" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:border-[#10b981] focus:bg-white transition-colors" required>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold text-slate-700 uppercase tracking-wide">Subject</label>
+                        <input type="text" placeholder="Project Inquiry / Feedback" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:border-[#10b981] focus:bg-white transition-colors" required>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold text-slate-700 uppercase tracking-wide">Message Body</label>
+                        <textarea rows="4" placeholder="Type your notes or questions out here..." class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:border-[#10b981] focus:bg-white transition-colors" required></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-[#10b981] hover:bg-[#059669] text-white font-bold py-4 rounded-xl transition-all shadow-md shadow-emerald-500/10 text-sm uppercase tracking-wider">
+                        Send Message <i class="fa-solid fa-paper-plane ml-2"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="border-t border-slate-200 bg-white py-12 text-center text-slate-500 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+            <p class="text-slate-500 font-medium">&copy; 2026 Trackify Expense Architecture. Alright Reserved.</p>
+            <div class="flex justify-center gap-6 text-lg">
+                <a href="#" class="text-slate-400 hover:text-[#10b981] transition-colors"><i class="fa-brands fa-github"></i></a>
+                <a href="#" class="text-slate-400 hover:text-[#10b981] transition-colors"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Start Animate On Scroll
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+
+        // Mobile Responsive Toggle Control
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            if (mobileMenu.classList.contains('hidden')) {
+                menuIcon.className = "fa-solid fa-bars text-2xl";
+            } else {
+                menuIcon.className = "fa-solid fa-xmark text-2xl text-[#10b981]";
+            }
+        });
+
+        // Auto-close menu drawer when navigation items are clicked
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIcon.className = "fa-solid fa-bars text-2xl";
+            });
+        });
+
+        // Dynamic background enhancement transition upon scroll events
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-md', 'bg-white/95');
+            } else {
+                nav.classList.remove('shadow-md', 'bg-white/95');
+            }
+        });
+    </script>
+</body>
+</html>

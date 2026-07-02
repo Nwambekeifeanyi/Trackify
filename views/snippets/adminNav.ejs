@@ -1,0 +1,56 @@
+ <aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-primary text-white sidebar-transition -translate-x-full lg:translate-x-0 flex flex-col shadow-2xl">
+            <div class="p-6 flex items-center justify-between flex-shrink-0">
+                <div class="flex items-center gap-3">
+                    <div class="bg-white/20 p-2 rounded-xl">
+                        <i data-lucide="layout-dashboard" class="text-white w-5 h-5"></i>
+                    </div>
+                    <span class="text-lg font-black tracking-tighter uppercase">UM Admin</span>
+                </div>
+                <button onclick="toggleSidebar()" class="lg:hidden p-1 hover:bg-white/10 rounded">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+
+            <nav class="flex-1 px-3 space-y-1 overflow-y-auto custom-sidebar-scroll pb-10">
+                <p class="px-4 py-2 text-[10px] font-black uppercase tracking-widest text-teal-200/50">Core</p>
+                <a href="#" class="sidebar-link active flex items-center gap-3 p-3 rounded-lg font-bold text-xs uppercase tracking-wider">
+                    <i data-lucide="grid" class="w-4 h-4"></i> Dashboard
+                </a>
+                <a href="staffs" class="sidebar-link flex items-center gap-3 p-3 rounded-lg font-bold text-xs uppercase tracking-wider">
+                    <i data-lucide="shield-check" class="w-4 h-4"></i> Staffs
+                </a>
+                
+                <p class="px-4 py-2 mt-4 text-[10px] font-black uppercase tracking-widest text-teal-200/50">CRM</p>
+                <a href="#" class="sidebar-link flex items-center gap-3 p-3 rounded-lg font-bold text-xs uppercase tracking-wider">
+                    <i data-lucide="users" class="w-4 h-4"></i> All Users
+                </a>
+                <a href="#" class="sidebar-link flex items-center gap-3 p-3 rounded-lg font-bold text-xs uppercase tracking-wider">
+                    <i data-lucide="tractor" class="w-4 h-4"></i> Sellers
+                </a>
+                <a href="#" class="sidebar-link flex items-center gap-3 p-3 rounded-lg font-bold text-xs uppercase tracking-wider">
+                    <i data-lucide="shopping-bag" class="w-4 h-4"></i> Buyers
+                </a>
+
+                <p class="px-4 py-2 mt-4 text-[10px] font-black uppercase tracking-widest text-teal-200/50">Marketplace</p>
+                <a href="#" class="sidebar-link flex items-center gap-3 p-3 rounded-lg font-bold text-xs uppercase tracking-wider">
+                    <i data-lucide="box" class="w-4 h-4"></i> Products
+                </a>
+                <a href="#" class="sidebar-link flex items-center gap-3 p-3 rounded-lg font-bold text-xs uppercase tracking-wider">
+                    <i data-lucide="users-2" class="w-4 h-4"></i> Group Buys
+                </a>
+                <a href="#" class="sidebar-link flex items-center gap-3 p-3 rounded-lg font-bold text-xs uppercase tracking-wider">
+                    <i data-lucide="shopping-cart" class="w-4 h-4"></i> Orders
+                </a>
+
+                <p class="px-4 py-2 mt-4 text-[10px] font-black uppercase tracking-widest text-teal-200/50">Operations</p>
+                <a href="#" class="sidebar-link flex items-center gap-3 p-3 rounded-lg font-bold text-xs uppercase tracking-wider">
+                    <i data-lucide="bar-chart-big" class="w-4 h-4"></i> Analytics
+                </a>
+                <a href="#" class="sidebar-link flex items-center gap-3 p-3 rounded-lg font-bold text-xs uppercase tracking-wider">
+                    <i data-lucide="archive" class="w-4 h-4"></i> Inventory
+                </a>
+                <a href="#" class="sidebar-link flex items-center gap-3 p-3 rounded-lg font-bold text-xs uppercase tracking-wider">
+                    <i data-lucide="bell-ring" class="w-4 h-4"></i> Alerts
+                </a>
+            </nav>
+        </aside>

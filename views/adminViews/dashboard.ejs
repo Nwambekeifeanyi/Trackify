@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin HQ | Universal Market</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root { --primary: #008080; --secondary: #ffbf00; }
+        .bg-primary { background-color: var(--primary); }
+        .text-primary { color: var(--primary); }
+        
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        
+        /* Sidebar Glassmorphism & Transition */
+        .sidebar-transition { transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        
+        .sidebar-link {
+            transition: all 0.2s ease;
+            border-left: 4px solid transparent;
+        }
+        .sidebar-link:hover { background: rgba(255, 255, 255, 0.1); }
+        .sidebar-link.active {
+            background: rgba(255, 255, 255, 0.2);
+            border-left: 4px solid var(--secondary);
+        }
+
+        /* Custom Vertical Scrollbar for Sidebar */
+        .custom-sidebar-scroll::-webkit-scrollbar {
+            width: 5px;
+        }
+        .custom-sidebar-scroll::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+        }
+        .custom-sidebar-scroll::-webkit-scrollbar-thumb {
+            background: rgba(255, 191, 0, 0.3);
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        .custom-sidebar-scroll::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary);
+        }
+
+        /* Dropdown Animation */
+        .dropdown-animate {
+            transform-origin: top right;
+            transition: all 0.2s scale;
+        }
+        .hidden-dropdown { opacity: 0; transform: scale(0.95); pointer-events: none; }
+        .show-dropdown { opacity: 1; transform: scale(1); pointer-events: auto; }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-900 overflow-hidden">
+
+    <div class="flex h-screen overflow-hidden">
+
+
+        <!-- =============== navbar starts ================== -->
+  <%- include('../snippets/adminNav.ejs') %>
+<!-- =============== navbar ends ================== -->
+
+        <div class="flex-1 flex flex-col min-w-0 h-screen lg:ml-64">
+            
+            <!-- =============== navbar starts ================== -->
+  <%- include('../snippets/adminTop.ejs') %>
+<!-- =============== navbar ends ================== -->
+
+            <main class="flex-1 overflow-y-auto p-4 md:p-8 bg-gray-50/50">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
+                    <div class="bg-white p-5 rounded-3xl shadow-sm border border-gray-100" data-aos="fade-up">
+                        <div class="bg-blue-50 w-10 h-10 rounded-xl flex items-center justify-center mb-4"><i data-lucide="users" class="text-blue-600 w-5 h-5"></i></div>
+                        <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Total Users</p>
+                        <h3 class="text-xl font-black text-gray-800">42,890</h3>
+                    </div>
+                    <div class="bg-white p-5 rounded-3xl shadow-sm border border-gray-100" data-aos="fade-up" data-aos-delay="100">
+                        <div class="bg-amber-50 w-10 h-10 rounded-xl flex items-center justify-center mb-4"><i data-lucide="package" class="text-amber-600 w-5 h-5"></i></div>
+                        <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Total Products</p>
+                        <h3 class="text-xl font-black text-gray-800">1,402</h3>
+                    </div>
+                    <div class="bg-white p-5 rounded-3xl shadow-sm border border-gray-100" data-aos="fade-up" data-aos-delay="200">
+                        <div class="bg-teal-50 w-10 h-10 rounded-xl flex items-center justify-center mb-4"><i data-lucide="banknote" class="text-primary w-5 h-5"></i></div>
+                        <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Total Revenue</p>
+                        <h3 class="text-xl font-black text-gray-800">$1.2M</h3>
+                    </div>
+                    <div class="bg-white p-5 rounded-3xl shadow-sm border border-gray-100" data-aos="fade-up" data-aos-delay="300">
+                        <div class="bg-purple-50 w-10 h-10 rounded-xl flex items-center justify-center mb-4"><i data-lucide="shopping-cart" class="text-purple-600 w-5 h-5"></i></div>
+                        <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Total Orders</p>
+                        <h3 class="text-xl font-black text-gray-800">8,560</h3>
+                    </div>
+                    <div class="bg-white p-5 rounded-3xl shadow-sm border border-red-100" data-aos="fade-up" data-aos-delay="400">
+                        <div class="bg-red-50 w-10 h-10 rounded-xl flex items-center justify-center mb-4"><i data-lucide="alert-triangle" class="text-red-600 w-5 h-5"></i></div>
+                        <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Alerts</p>
+                        <h3 class="text-xl font-black text-red-600">12</h3>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <div class="lg:col-span-2 bg-white rounded-[2.5rem] border border-gray-100 shadow-sm overflow-hidden" data-aos="fade-right">
+        <div class="p-8 border-b border-gray-50 flex justify-between items-center">
+            <h4 class="font-black text-gray-800 uppercase text-xs tracking-widest">New Registered Users</h4>
+            <button class="text-[10px] font-black text-primary hover:underline">View All</button>
+        </div>
+        <div class="overflow-x-auto no-scrollbar">
+            <table class="w-full text-left min-w-[600px]">
+                <thead class="bg-gray-50 text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                    <tr>
+                        <th class="px-8 py-4">User</th>
+                        <th class="px-8 py-4">Contact</th>
+                        <th class="px-8 py-4">Type</th>
+                        <th class="px-8 py-4">Joined</th>
+                        <th class="px-8 py-4">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="text-xs font-bold text-gray-600">
+                    <tr class="border-b border-gray-50 hover:bg-gray-50 transition">
+                        <td class="px-8 py-4"><div class="flex items-center gap-3"><img src="https://i.pravatar.cc/100?img=1" class="w-8 h-8 rounded-lg"><span class="font-black">Emma Watson</span></div></td>
+                        <td class="px-8 py-4 font-medium">emma.w@farm.com</td>
+                        <td class="px-8 py-4"><span class="bg-teal-100 text-teal-700 px-2 py-1 rounded-md text-[9px] uppercase font-black">Seller</span></td>
+                        <td class="px-8 py-4 text-gray-400">Feb 28, 2026</td>
+                        <td class="px-8 py-4"><button class="p-2 hover:bg-white rounded-lg"><i data-lucide="external-link" class="w-4 h-4 text-primary"></i></button></td>
+                    </tr>
+                    <tr class="border-b border-gray-50 hover:bg-gray-50 transition">
+                        <td class="px-8 py-4"><div class="flex items-center gap-3"><img src="https://i.pravatar.cc/100?img=2" class="w-8 h-8 rounded-lg"><span class="font-black">Liam Neeson</span></div></td>
+                        <td class="px-8 py-4 font-medium">liam.n@supply.com</td>
+                        <td class="px-8 py-4"><span class="bg-amber-100 text-amber-700 px-2 py-1 rounded-md text-[9px] uppercase font-black">Buyer</span></td>
+                        <td class="px-8 py-4 text-gray-400">Feb 28, 2026</td>
+                        <td class="px-8 py-4"><button class="p-2 hover:bg-white rounded-lg"><i data-lucide="external-link" class="w-4 h-4 text-primary"></i></button></td>
+                    </tr>
+                    <tr class="border-b border-gray-50 hover:bg-gray-50 transition">
+                        <td class="px-8 py-4"><div class="flex items-center gap-3"><img src="https://i.pravatar.cc/100?img=3" class="w-8 h-8 rounded-lg"><span class="font-black">Sarah Chen</span></div></td>
+                        <td class="px-8 py-4 font-medium">s.chen@agri.io</td>
+                        <td class="px-8 py-4"><span class="bg-teal-100 text-teal-700 px-2 py-1 rounded-md text-[9px] uppercase font-black">Seller</span></td>
+                        <td class="px-8 py-4 text-gray-400">Feb 27, 2026</td>
+                        <td class="px-8 py-4"><button class="p-2 hover:bg-white rounded-lg"><i data-lucide="external-link" class="w-4 h-4 text-primary"></i></button></td>
+                    </tr>
+                    <tr class="border-b border-gray-50 hover:bg-gray-50 transition">
+                        <td class="px-8 py-4"><div class="flex items-center gap-3"><img src="https://i.pravatar.cc/100?img=4" class="w-8 h-8 rounded-lg"><span class="font-black">Marcus Vane</span></div></td>
+                        <td class="px-8 py-4 font-medium">vane.m@global.com</td>
+                        <td class="px-8 py-4"><span class="bg-amber-100 text-amber-700 px-2 py-1 rounded-md text-[9px] uppercase font-black">Buyer</span></td>
+                        <td class="px-8 py-4 text-gray-400">Feb 27, 2026</td>
+                        <td class="px-8 py-4"><button class="p-2 hover:bg-white rounded-lg"><i data-lucide="external-link" class="w-4 h-4 text-primary"></i></button></td>
+                    </tr>
+                    <tr class="border-b border-gray-50 hover:bg-gray-50 transition">
+                        <td class="px-8 py-4"><div class="flex items-center gap-3"><img src="https://i.pravatar.cc/100?img=5" class="w-8 h-8 rounded-lg"><span class="font-black">Elena Rose</span></div></td>
+                        <td class="px-8 py-4 font-medium">rose@fields.com</td>
+                        <td class="px-8 py-4"><span class="bg-teal-100 text-teal-700 px-2 py-1 rounded-md text-[9px] uppercase font-black">Seller</span></td>
+                        <td class="px-8 py-4 text-gray-400">Feb 26, 2026</td>
+                        <td class="px-8 py-4"><button class="p-2 hover:bg-white rounded-lg"><i data-lucide="external-link" class="w-4 h-4 text-primary"></i></button></td>
+                    </tr>
+                    <tr class="border-b border-gray-50 hover:bg-gray-50 transition">
+                        <td class="px-8 py-4"><div class="flex items-center gap-3"><img src="https://i.pravatar.cc/100?img=6" class="w-8 h-8 rounded-lg"><span class="font-black">David Park</span></div></td>
+                        <td class="px-8 py-4 font-medium">d.park@market.com</td>
+                        <td class="px-8 py-4"><span class="bg-amber-100 text-amber-700 px-2 py-1 rounded-md text-[9px] uppercase font-black">Buyer</span></td>
+                        <td class="px-8 py-4 text-gray-400">Feb 26, 2026</td>
+                        <td class="px-8 py-4"><button class="p-2 hover:bg-white rounded-lg"><i data-lucide="external-link" class="w-4 h-4 text-primary"></i></button></td>
+                    </tr>
+                    <tr class="border-b border-gray-50 hover:bg-gray-50 transition">
+                        <td class="px-8 py-4"><div class="flex items-center gap-3"><img src="https://i.pravatar.cc/100?img=7" class="w-8 h-8 rounded-lg"><span class="font-black">Amina Yusuf</span></div></td>
+                        <td class="px-8 py-4 font-medium">amina.y@seeds.net</td>
+                        <td class="px-8 py-4"><span class="bg-teal-100 text-teal-700 px-2 py-1 rounded-md text-[9px] uppercase font-black">Seller</span></td>
+                        <td class="px-8 py-4 text-gray-400">Feb 25, 2026</td>
+                        <td class="px-8 py-4"><button class="p-2 hover:bg-white rounded-lg"><i data-lucide="external-link" class="w-4 h-4 text-primary"></i></button></td>
+                    </tr>
+                    <tr class="border-b border-gray-50 hover:bg-gray-50 transition">
+                        <td class="px-8 py-4"><div class="flex items-center gap-3"><img src="https://i.pravatar.cc/100?img=8" class="w-8 h-8 rounded-lg"><span class="font-black">Lucas Haze</span></div></td>
+                        <td class="px-8 py-4 font-medium">lucas@logistics.co</td>
+                        <td class="px-8 py-4"><span class="bg-amber-100 text-amber-700 px-2 py-1 rounded-md text-[9px] uppercase font-black">Buyer</span></td>
+                        <td class="px-8 py-4 text-gray-400">Feb 25, 2026</td>
+                        <td class="px-8 py-4"><button class="p-2 hover:bg-white rounded-lg"><i data-lucide="external-link" class="w-4 h-4 text-primary"></i></button></td>
+                    </tr>
+                    <tr class="border-b border-gray-50 hover:bg-gray-50 transition">
+                        <td class="px-8 py-4"><div class="flex items-center gap-3"><img src="https://i.pravatar.cc/100?img=9" class="w-8 h-8 rounded-lg"><span class="font-black">Sofia G.</span></div></td>
+                        <td class="px-8 py-4 font-medium">sofia@harvest.com</td>
+                        <td class="px-8 py-4"><span class="bg-teal-100 text-teal-700 px-2 py-1 rounded-md text-[9px] uppercase font-black">Seller</span></td>
+                        <td class="px-8 py-4 text-gray-400">Feb 24, 2026</td>
+                        <td class="px-8 py-4"><button class="p-2 hover:bg-white rounded-lg"><i data-lucide="external-link" class="w-4 h-4 text-primary"></i></button></td>
+                    </tr>
+                    <tr class="hover:bg-gray-50 transition">
+                        <td class="px-8 py-4"><div class="flex items-center gap-3"><img src="https://i.pravatar.cc/100?img=10" class="w-8 h-8 rounded-lg"><span class="font-black">Ivan Drago</span></div></td>
+                        <td class="px-8 py-4 font-medium">ivan@bulk.market</td>
+                        <td class="px-8 py-4"><span class="bg-amber-100 text-amber-700 px-2 py-1 rounded-md text-[9px] uppercase font-black">Buyer</span></td>
+                        <td class="px-8 py-4 text-gray-400">Feb 23, 2026</td>
+                        <td class="px-8 py-4"><button class="p-2 hover:bg-white rounded-lg"><i data-lucide="external-link" class="w-4 h-4 text-primary"></i></button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm" data-aos="fade-left">
+        <h4 class="font-black text-gray-800 uppercase text-xs tracking-widest mb-6">New Farmer Apps</h4>
+        <div class="space-y-6 max-h-[600px] overflow-y-auto no-scrollbar">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gray-100 rounded-xl overflow-hidden"><img src="https://i.pravatar.cc/100?img=21"></div>
+                    <div><p class="text-xs font-black">Sunny Orchards</p><p class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">Verified Organic</p></div>
+                </div>
+                <button class="text-[10px] font-black text-primary bg-teal-50 px-3 py-1.5 rounded-lg">Review</button>
+            </div>
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gray-100 rounded-xl overflow-hidden"><img src="https://i.pravatar.cc/100?img=22"></div>
+                    <div><p class="text-xs font-black">Green Valley</p><p class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">Dairy Specialist</p></div>
+                </div>
+                <button class="text-[10px] font-black text-primary bg-teal-50 px-3 py-1.5 rounded-lg">Review</button>
+            </div>
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gray-100 rounded-xl overflow-hidden"><img src="https://i.pravatar.cc/100?img=23"></div>
+                    <div><p class="text-xs font-black">Pure Bovine Ltd</p><p class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">Livestock Exports</p></div>
+                </div>
+                <button class="text-[10px] font-black text-primary bg-teal-50 px-3 py-1.5 rounded-lg">Review</button>
+            </div>
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gray-100 rounded-xl overflow-hidden"><img src="https://i.pravatar.cc/100?img=24"></div>
+                    <div><p class="text-xs font-black">Highland Honey</p><p class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">Local Beekeeping</p></div>
+                </div>
+                <button class="text-[10px] font-black text-primary bg-teal-50 px-3 py-1.5 rounded-lg">Review</button>
+            </div>
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gray-100 rounded-xl overflow-hidden"><img src="https://i.pravatar.cc/100?img=25"></div>
+                    <div><p class="text-xs font-black">Golden Grain</p><p class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">Cereal Supply</p></div>
+                </div>
+                <button class="text-[10px] font-black text-primary bg-teal-50 px-3 py-1.5 rounded-lg">Review</button>
+            </div>
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gray-100 rounded-xl overflow-hidden"><img src="https://i.pravatar.cc/100?img=26"></div>
+                    <div><p class="text-xs font-black">Urban Roots</p><p class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">Hydroponics</p></div>
+                </div>
+                <button class="text-[10px] font-black text-primary bg-teal-50 px-3 py-1.5 rounded-lg">Review</button>
+            </div>
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gray-100 rounded-xl overflow-hidden"><img src="https://i.pravatar.cc/100?img=27"></div>
+                    <div><p class="text-xs font-black">Silk Road Spice</p><p class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">Spices & Tea</p></div>
+                </div>
+                <button class="text-[10px] font-black text-primary bg-teal-50 px-3 py-1.5 rounded-lg">Review</button>
+            </div>
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gray-100 rounded-xl overflow-hidden"><img src="https://i.pravatar.cc/100?img=28"></div>
+                    <div><p class="text-xs font-black">Blueberry Hill</p><p class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">Berry Production</p></div>
+                </div>
+                <button class="text-[10px] font-black text-primary bg-teal-50 px-3 py-1.5 rounded-lg">Review</button>
+            </div>
+           
+        </div>
+    </div>
+</div>
+            </main>
+        </div>
+    </div>
+
+    <div id="sidebarOverlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden"></div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true });
+        lucide.createIcons();
+
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+        function toggleSidebar() {
+            sidebar.classList.toggle('-translate-x-full');
+            overlay.classList.toggle('hidden');
+        }
+
+        const dropdown = document.getElementById('profileDropdown');
+        function toggleDropdown() {
+            dropdown.classList.toggle('hidden-dropdown');
+            dropdown.classList.toggle('show-dropdown');
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.closest('#profileDropdown') && !event.target.closest('button[onclick="toggleDropdown()"]')) {
+                dropdown.classList.add('hidden-dropdown');
+                dropdown.classList.remove('show-dropdown');
+            }
+        }
+    </script>
+</body>
+</html>

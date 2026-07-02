@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trackify - Secure Access Portal</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --color-bg-light: #f8fafc;
+            --color-bg-card: #ffffff;
+            --color-primary: #10b981;
+            --color-secondary: #4f46e5;
+            --color-text-main: #0f172a;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--color-bg-light);
+            color: var(--color-text-main);
+            overflow-x: hidden;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(15, 23, 42, 0.06);
+        }
+    </style>
+</head>
+<body class="h-screen flex flex-col justify-between relative bg-gradient-to-b from-slate-50 to-[#f8fafc] overflow-hidden">
+
+    <div class="absolute top-1/4 left-1/4 w-80 h-80 bg-emerald-500/5 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-500/5 rounded-full blur-[150px] pointer-events-none"></div>
+
+    <nav class="w-full z-50 glass border-b border-slate-200/50 shrink-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="/" class="flex items-center gap-2">
+                    <div class="bg-gradient-to-tr from-[#10b981] to-[#4f46e5] p-2 rounded-xl shadow-sm">
+                        <i class="fa-solid fa-wallet text-base text-white"></i>
+                    </div>
+                    <span class="text-xl font-extrabold tracking-tight text-slate-900">Track<span class="text-[#10b981]">ify.</span></span>
+                </a>
+
+                <div>
+                    <a href="/" class="text-xs font-semibold text-slate-600 hover:text-[#10b981] transition-colors flex items-center gap-1.5">
+                        <i class="fa-solid fa-arrow-left text-[10px]"></i> Home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow flex items-center justify-center px-4 relative z-10 my-auto">
+        <div data-aos="fade-up" class="w-full max-w-sm p-6 rounded-2xl bg-white border border-slate-200 shadow-lg">
+            
+            <div class="text-center mb-5">
+                <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 text-[10px] font-bold tracking-wide uppercase mb-2 border border-slate-200">
+                    <i class="fa-solid fa-shield-halved text-emerald-500"></i> Centralized Access
+                </span>
+                <h1 class="text-xl font-extrabold tracking-tight text-slate-900">Welcome Back</h1>
+                <p class="text-slate-500 text-xs mt-0.5">Access your campus account</p>
+            </div>
+
+            <form class="space-y-4">
+                
+                <div class="space-y-1">
+                    <label class="text-[10px] font-bold text-slate-700 uppercase tracking-wide">Student Email</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400">
+                            <i class="fa-solid fa-envelope text-xs"></i>
+                        </span>
+                        <input type="email" placeholder="johndoe@student.edu" 
+                            class="w-full bg-slate-50 border border-slate-200 rounded-lg pl-9 pr-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-[#10b981] focus:bg-white transition-colors" 
+                            required>
+                    </div>
+                </div>
+
+                <div class="space-y-1">
+                    <div class="flex justify-between items-center">
+                        <label class="text-[10px] font-bold text-slate-700 uppercase tracking-wide">Password</label>
+                        <a href="/" class="text-[10px] font-semibold text-[#4f46e5] hover:underline">Forgot?</a>
+                    </div>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400">
+                            <i class="fa-solid fa-lock text-xs"></i>
+                        </span>
+                        <input type="password" id="login-password" placeholder="••••••••••••" 
+                            class="w-full bg-slate-50 border border-slate-200 rounded-lg pl-9 pr-10 py-2 text-xs text-slate-900 focus:outline-none focus:border-[#10b981] focus:bg-white transition-colors" 
+                            required>
+                        <button type="button" onclick="togglePasswordVisibility()" class="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 hover:text-slate-600 focus:outline-none">
+                            <i class="fa-solid fa-eye text-xs" id="toggle-eye-icon"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="flex items-center">
+                    <input type="checkbox" id="remember-me" class="w-3.5 h-3.5 rounded border-slate-300 text-[#10b981] focus:ring-[#10b981] accent-[#10b981]">
+                    <label for="remember-me" class="ml-2 text-[11px] font-semibold text-slate-600 cursor-pointer select-none">Remember device</label>
+                </div>
+
+                <button type="submit" class="w-full bg-[#10b981] hover:bg-[#059669] text-white font-bold py-2.5 rounded-lg transition-all shadow-sm text-xs uppercase tracking-wider mt-1">
+                    Login <i class="fa-solid fa-arrow-right-to-bracket ml-1.5"></i>
+                </button>
+            </form>
+
+            <div class="text-center mt-4 pt-4 border-t border-slate-100">
+                <p class="text-[11px] text-slate-500">
+                    New here? <a href="/register" class="text-[#10b981] font-bold hover:underline">Register</a>
+                </p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="border-t border-slate-200/60 bg-white py-4 text-center text-slate-400 text-[10px] relative z-10 shrink-0">
+        <p>&copy; 2026 Trackify Expense Architecture.</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 600,
+            once: true,
+            offset: 20
+        });
+
+        function togglePasswordVisibility() {
+            const passwordField = document.getElementById('login-password');
+            const eyeIcon = document.getElementById('toggle-eye-icon');
+            
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                eyeIcon.className = "fa-solid fa-eye-slash text-xs text-[#10b981]";
+            } else {
+                passwordField.type = 'password';
+                eyeIcon.className = "fa-solid fa-eye text-xs";
+            }
+        }
+    </script>
+</body>
+</html>
