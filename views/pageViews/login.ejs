@@ -37,6 +37,22 @@
 </head>
 <body class="h-screen flex flex-col justify-between relative bg-gradient-to-b from-slate-50 to-[#f8fafc] overflow-hidden">
 
+      <div id="formToast" class="fixed top-10 left-1/2 -translate-x-1/2 z-[10000] transform -translate-y-20 opacity-0 transition-all duration-500 pointer-events-none">
+        <div class="bg-white border-l-4 border-red-500 shadow-2xl rounded-xl p-4 flex items-center space-x-4 min-w-[320px]">
+            <div id="toastIconBg" class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0">
+                <i id="toastIcon" class="fas fa-exclamation-triangle text-white"></i>
+            </div>
+            <div class="flex-1">
+                <p id="toastTitle" class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-0.5">System Alert</p>
+                <p id="toastMessage" class="text-sm font-bold text-slate-800">Invalid Input Detected</p>
+            </div>
+            <button onclick="appNotify.hide()" class="text-slate-300 hover:text-slate-600 transition">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+
     <div class="absolute top-1/4 left-1/4 w-80 h-80 bg-emerald-500/5 rounded-full blur-[120px] pointer-events-none"></div>
     <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-500/5 rounded-full blur-[150px] pointer-events-none"></div>
 
@@ -70,7 +86,7 @@
                 <p class="text-slate-500 text-xs mt-0.5">Access your campus account</p>
             </div>
 
-            <form class="space-y-4">
+            <form id="form" class="space-y-4">
                 
                 <div class="space-y-1">
                     <label class="text-[10px] font-bold text-slate-700 uppercase tracking-wide">Student Email</label>
@@ -78,9 +94,9 @@
                         <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400">
                             <i class="fa-solid fa-envelope text-xs"></i>
                         </span>
-                        <input type="email" placeholder="johndoe@student.edu" 
+                        <input type="email" placeholder="johndoe@student.edu" name="email"
                             class="w-full bg-slate-50 border border-slate-200 rounded-lg pl-9 pr-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-[#10b981] focus:bg-white transition-colors" 
-                            required>
+                        >
                     </div>
                 </div>
 
@@ -93,9 +109,9 @@
                         <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400">
                             <i class="fa-solid fa-lock text-xs"></i>
                         </span>
-                        <input type="password" id="login-password" placeholder="••••••••••••" 
+                        <input type="password" id="login-password" placeholder="••••••••••••"  name="password"
                             class="w-full bg-slate-50 border border-slate-200 rounded-lg pl-9 pr-10 py-2 text-xs text-slate-900 focus:outline-none focus:border-[#10b981] focus:bg-white transition-colors" 
-                            required>
+                        >
                         <button type="button" onclick="togglePasswordVisibility()" class="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 hover:text-slate-600 focus:outline-none">
                             <i class="fa-solid fa-eye text-xs" id="toggle-eye-icon"></i>
                         </button>
@@ -107,7 +123,7 @@
                     <label for="remember-me" class="ml-2 text-[11px] font-semibold text-slate-600 cursor-pointer select-none">Remember device</label>
                 </div>
 
-                <button type="submit" class="w-full bg-[#10b981] hover:bg-[#059669] text-white font-bold py-2.5 rounded-lg transition-all shadow-sm text-xs uppercase tracking-wider mt-1">
+                <button id="submit_btn" type="submit" class="w-full bg-[#10b981] hover:bg-[#059669] text-white font-bold py-2.5 rounded-lg transition-all shadow-sm text-xs uppercase tracking-wider mt-1">
                     Login <i class="fa-solid fa-arrow-right-to-bracket ml-1.5"></i>
                 </button>
             </form>
@@ -125,6 +141,7 @@
         <p>&copy; 2026 Trackify Expense Architecture.</p>
     </footer>
 
+    <script src="/formHandlers/user/login.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({

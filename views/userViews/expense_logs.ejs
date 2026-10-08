@@ -66,14 +66,15 @@
                 <div class="flex items-center gap-2.5 w-full sm:w-auto justify-end">
                     <select id="expense-category-filter" class="px-3 py-2 border border-slate-200 rounded-lg text-xs font-bold text-slate-600 bg-slate-50/50 focus:outline-hidden cursor-pointer">
                         <option value="ALL">All Units</option>
-                        <option value="Academic">Academic & Research</option>
-                        <option value="Subsistence">Food & Subsistence</option>
-                        <option value="Infrastructure">Infrastructure</option>
+                        
                     </select>
 
-                    <button onclick="openNewExpenseModal()" class="bg-[#e11d48] hover:bg-[#be123c] text-white text-xs font-bold px-4 py-2 rounded-lg transition-all flex items-center gap-1.5 shadow-xs shrink-0 cursor-pointer">
-                        <i class="fa-solid fa-circle-minus"></i> Log Expense
-                    </button>
+                    <a href="add-expenses">
+
+                        <button class="bg-[#e11d48] hover:bg-[#be123c] text-white text-xs font-bold px-4 py-2 rounded-lg transition-all flex items-center gap-1.5 shadow-xs shrink-0 cursor-pointer">
+                            <i class="fa-solid fa-circle-minus"></i> Log Expense
+                        </button>
+                    </a>
                 </div>
             </section>
 
@@ -98,45 +99,31 @@
         </tr>
     </thead>
     <tbody id="income-table-body" class="divide-y divide-slate-100 text-xs text-slate-700">
-    <tr class="income-row hover:bg-slate-50/50 transition-colors" data-category="Freelance">
-        <td class="py-3.5 px-5 font-bold text-slate-800">LiteAcad Portal Contract</td>
-        <td class="py-3.5 px-5">
-            <span class="px-2 py-0.5 bg-indigo-50 text-indigo-600 rounded-md font-semibold text-[10px]">Freelance</span>
-        </td>
-        <td class="py-3.5 px-5 text-slate-400 font-medium">June 28, 2026</td>
-        <td class="py-3.5 px-5 text-right font-extrabold text-emerald-500">+₦120,000.00</td>
-        <td class="py-3.5 px-5 text-center">
-            <a href="receipt" class="inline-block text-[11px] font-bold bg-[#10b981] text-white px-2.5 py-1 rounded transition-all">
-                View
-            </a>
-        </td>
-    </tr>
-    <tr class="income-row hover:bg-slate-50/50 transition-colors" data-category="SaaS Platform">
-        <td class="py-3.5 px-5 font-bold text-slate-800">TegraLink WhatsApp Subscriptions</td>
-        <td class="py-3.5 px-5">
-            <span class="px-2 py-0.5 bg-emerald-50 text-emerald-600 rounded-md font-semibold text-[10px]">SaaS Platform</span>
-        </td>
-        <td class="py-3.5 px-5 text-slate-400 font-medium">July 01, 2026</td>
-        <td class="py-3.5 px-5 text-right font-extrabold text-emerald-500">+₦45,500.00</td>
-        <td class="py-3.5 px-5 text-center">
-            <a href="receipt" class="inline-block text-[11px] font-bold bg-[#10b981] text-white px-2.5 py-1 rounded transition-all">
-                View
-            </a>
-        </td>
-    </tr>
-    <tr class="income-row hover:bg-slate-50/50 transition-colors" data-category="Stipend">
-        <td class="py-3.5 px-5 font-bold text-slate-800">Research Grant Clearing</td>
-        <td class="py-3.5 px-5">
-            <span class="px-2 py-0.5 bg-amber-50 text-amber-600 rounded-md font-semibold text-[10px]">Stipend</span>
-        </td>
-        <td class="py-3.5 px-5 text-slate-400 font-medium">June 15, 2026</td>
-        <td class="py-3.5 px-5 text-right font-extrabold text-emerald-500">+₦15,000.00</td>
-        <td class="py-3.5 px-5 text-center">
-            <a href="receipt" class="inline-block text-[11px] font-bold bg-[#10b981] text-white px-2.5 py-1 rounded transition-all">
-                View
-            </a>
-        </td>
-    </tr>
+
+         <% if (context.expenses) { %>
+     
+        <% context.expenses.forEach(expense => { %>
+         
+            <tr class="income-row hover:bg-slate-50/50 transition-colors" data-category="SaaS Platform">
+                <td class="py-3.5 px-5 font-bold text-slate-800 capitalize"><%= expense.source %></td>
+                <td class="py-3.5 px-5">
+                    <span class="px-2 py-0.5 bg-amber-50 text-amber-600 rounded-md font-semibold text-[10px]"><%= expense.category %></span>
+                </td>
+                <td class="py-3.5 px-5 text-slate-400 font-medium"><%= new Date(expense.regDate).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) %></td>
+                <td class="py-3.5 px-5 text-right font-extrabold text-rose-600">-₦<%= expense.amount.toLocaleString('en-NG', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) %></td>
+                <td class="py-3.5 px-5 text-center">
+                    <a href="receipt?id=<%= expense._id %>" class="inline-block text-[11px] font-bold bg-[#10b981] text-white px-2.5 py-1 rounded transition-all">
+                        View
+                    </a>
+                </td>
+            </tr>
+        <% }) %>
+    
+          
+    <% } %>
+
+   
+   
 </tbody>
 </table>
                 </div>

@@ -17,33 +17,18 @@ const checkAdmin = (req, res, next) => {
   });
 };
 
-const checkSeller = (req, res, next) => {
-  const token = req.cookies.jwt;
 
-  if (!token) {
-    return res.redirect("/seller/login");
-  }
-
-  jwt.verify(token, process.env.TOKEN_SECRET, (error, decodedToken) => {
-    if (error) {
-      return res.redirect("/seller/login");
-    }
-    req.admin = decodedToken.id;
-    console.log(`${req.headers.host}${req.originalUrl}`);
-    next();
-  });
-};
 
 const checkUser = (req, res, next) => {
   const token = req.cookies.jwt;
 
   if (!token) {
-    return res.redirect("/");
+    return res.redirect("/login");
   }
 
   jwt.verify(token, process.env.TOKEN_SECRET, (error, decodedToken) => {
     if (error) {
-      return res.redirect("/");
+      return res.redirect("/login");
     }
     req.user = decodedToken.id;
     console.log(req.user);
@@ -67,20 +52,7 @@ const checkAdminLogout = (req, res, next) => {
     return res.redirect("/admin/dashboard");
   });
 };
-const checkSellerLogout = (req, res, next) => {
-  const token = req.cookies.jwt;
 
-  if (!token) {
-    return next();
-  }
-
-  jwt.verify(token, process.env.TOKEN_SECRET, (error) => {
-    if (error) {
-      return next();
-    }
-    return res.redirect("/seller/dashboard");
-  });
-};
 
 const checkUserLogout = (req, res, next) => {
   const token = req.cookies.jwt;
@@ -97,4 +69,4 @@ const checkUserLogout = (req, res, next) => {
   });
 };
 
-export { checkAdmin, checkSeller, checkUser, checkAdminLogout,checkSellerLogout, checkUserLogout };
+export { checkAdmin, checkUser, checkAdminLogout, checkUserLogout };

@@ -38,12 +38,19 @@
             <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-[#10b981] to-[#4f46e5] flex items-center justify-center font-extrabold text-white text-xs shadow-sm">
                 JD
             </div>
+
             <div>
-                <h4 class="text-xs font-bold text-slate-800 leading-none">John Doe</h4>
-                <span class="text-[10px] text-slate-400 font-medium">Developer Hub</span>
+                <% if (context.this_user) { %>
+                    <h4 class="text-xs font-bold text-slate-800 capitalize leading-none"><%= context.this_user.first_name %> <%= context.this_user.last_name %></h4>
+                    
+                    <% } else { %>
+                        <h4 class="text-xs font-bold text-slate-800 leading-none">Guest</h4>
+                     
+                <% } %>
+                <span class="text-[10px] text-slate-400 font-medium">User Account</span>
             </div>
         </div>
-        <a href="#" class="text-slate-400 hover:text-red-500 transition-colors">
+        <a href="/auth/user-logout" class="text-slate-400 hover:text-red-500 transition-colors">
             <i class="fa-solid fa-arrow-right-from-bracket text-xs"></i>
         </a>
     </div>

@@ -4,54 +4,36 @@ import bcrypt from 'bcrypt'
 const userSchema = mongoose.Schema({
 
       //contained in reg form
-      full_name:{
+      first_name:{
+            type:String,
+      },
+      last_name:{
             type:String,
       },
      
     email:{
             type:String,
       },
-    contact:{
-            type:String,
-      },
-    gender:{
-            type:String,
-      },
+   
       password:{
             type:String,
       },
-      role:{
-            type:String,
-            default: 'customer'
+
+      income:{
+            type:Number,
+            default: 0,
       },
-      
-      total_product_sold:{
-            type:String,
-            default: '0'
+
+      expenditure:{
+            type:Number,
+            default: 0,
       },
-      amount_sold:{
-            type:String,
-            default: '0'
+      balance:{
+            type:Number,
+            default: 0,
       },
      
       
-      is_blocked:{
-            type:Boolean,
-            default:false
-
-      },
-      is_deleted:{
-            type:Boolean,
-            default:false
-
-      },
-      
-      profile:{
-            type:String,
-            default:'profile3.png'
-      },
-
-     
      
       regDate:{
             type:String,
@@ -60,9 +42,19 @@ const userSchema = mongoose.Schema({
 })
 
 userSchema.pre('save', async function(next){
-      const salt = await bcrypt.genSalt()
-      this.password = await bcrypt.hash(this.password,salt)
-      next()
+
+     // ONLY hash the password if it is new or being updated
+           if (!this.isModified('password')) {
+                 return next();
+           }
+     
+           try {
+                 const salt = await bcrypt.genSalt(12);
+                 this.password = await bcrypt.hash(this.password, salt);
+                 next();
+           } catch (error) {
+                 next(error);
+           }
 })
 
 // userSchema.statics.login = async function(userName,password) {
@@ -73,9 +65,9 @@ userSchema.pre('save', async function(next){
             if (auth) {
                   return user
             }
-            throw new Error('incorrect password')
+            throw new Error('Invalid credentials. Please check your email and password.');
       }
-      throw new Error('this user does not exist')
+       throw new Error('Invalid credentials. Please check your email and password.');
 }
 
 const User = mongoose.model('user',userSchema)

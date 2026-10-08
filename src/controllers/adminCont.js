@@ -1,9 +1,5 @@
 import User from "../models/user.js";
 import Admin from "../models/admin.js";
-import Product from "../models/product.js";
-import Purchase from "../models/purchase.js";
-import Cart from "../models/cart.js";
-import Report from "../models/report.js";
 
 import cloudinary from '../helpers/cloudinary.js';
 

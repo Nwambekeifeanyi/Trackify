@@ -66,14 +66,15 @@
                 <div class="flex items-center gap-2.5 w-full sm:w-auto justify-end">
                     <select id="income-category-filter" class="px-3 py-2 border border-slate-200 rounded-lg text-xs font-bold text-slate-600 bg-slate-50/50 focus:outline-hidden cursor-pointer">
                         <option value="ALL">All Categories</option>
-                        <option value="Freelance">Freelance Dev</option>
-                        <option value="SaaS Platform">SaaS Revenue</option>
-                        <option value="Stipend">Academic Stipend</option>
+                       
                     </select>
 
-                    <button onclick="openNewTransactionModal()" class="bg-[#10b981] hover:bg-[#059669] text-white text-xs font-bold px-4 py-2 rounded-lg transition-all flex items-center gap-1.5 shadow-xs shrink-0 cursor-pointer">
-                        <i class="fa-solid fa-circle-plus"></i> Add Income
-                    </button>
+                    <a href="add-income">
+
+                        <button class="bg-[#10b981] hover:bg-[#059669] text-white text-xs font-bold px-4 py-2 rounded-lg transition-all flex items-center gap-1.5 shadow-xs shrink-0 cursor-pointer">
+                            <i class="fa-solid fa-circle-plus"></i> Add Income
+                        </button>
+                    </a>
                 </div>
             </section>
 
@@ -96,45 +97,27 @@
         </tr>
     </thead>
    <tbody id="income-table-body" class="divide-y divide-slate-100 text-xs text-slate-700">
-    <tr class="income-row hover:bg-slate-50/50 transition-colors" data-category="Freelance">
-        <td class="py-3.5 px-5 font-bold text-slate-800">LiteAcad Portal Contract</td>
-        <td class="py-3.5 px-5">
-            <span class="px-2 py-0.5 bg-indigo-50 text-indigo-600 rounded-md font-semibold text-[10px]">Freelance</span>
-        </td>
-        <td class="py-3.5 px-5 text-slate-400 font-medium">June 28, 2026</td>
-        <td class="py-3.5 px-5 text-right font-extrabold text-emerald-500">+₦120,000.00</td>
-        <td class="py-3.5 px-5 text-center">
-            <a href="/income/receipt" class="inline-block text-[11px] font-bold bg-[#10b981] text-white px-2.5 py-1 rounded transition-all">
-                View
-            </a>
-        </td>
-    </tr>
-    <tr class="income-row hover:bg-slate-50/50 transition-colors" data-category="SaaS Platform">
-        <td class="py-3.5 px-5 font-bold text-slate-800">TegraLink WhatsApp Subscriptions</td>
-        <td class="py-3.5 px-5">
-            <span class="px-2 py-0.5 bg-emerald-50 text-emerald-600 rounded-md font-semibold text-[10px]">SaaS Platform</span>
-        </td>
-        <td class="py-3.5 px-5 text-slate-400 font-medium">July 01, 2026</td>
-        <td class="py-3.5 px-5 text-right font-extrabold text-emerald-500">+₦45,500.00</td>
-        <td class="py-3.5 px-5 text-center">
-            <a href="/income/receipt" class="inline-block text-[11px] font-bold bg-[#10b981] text-white px-2.5 py-1 rounded transition-all">
-                View
-            </a>
-        </td>
-    </tr>
-    <tr class="income-row hover:bg-slate-50/50 transition-colors" data-category="Stipend">
-        <td class="py-3.5 px-5 font-bold text-slate-800">Research Grant Clearing</td>
-        <td class="py-3.5 px-5">
-            <span class="px-2 py-0.5 bg-amber-50 text-amber-600 rounded-md font-semibold text-[10px]">Stipend</span>
-        </td>
-        <td class="py-3.5 px-5 text-slate-400 font-medium">June 15, 2026</td>
-        <td class="py-3.5 px-5 text-right font-extrabold text-emerald-500">+₦15,000.00</td>
-        <td class="py-3.5 px-5 text-center">
-            <a href="/income/receipt" class="inline-block text-[11px] font-bold bg-[#10b981] text-white px-2.5 py-1 rounded transition-all">
-                View
-            </a>
-        </td>
-    </tr>
+
+    <% if (context.incomes) { %>
+     
+        <% context.incomes.forEach(income => { %>
+         
+            <tr class="income-row hover:bg-slate-50/50 transition-colors" data-category="SaaS Platform">
+                <td class="py-3.5 px-5 font-bold text-slate-800 capitalize"><%= income.source %></td>
+                <td class="py-3.5 px-5">
+                    <span class="px-2 py-0.5 bg-emerald-50 text-emerald-600 rounded-md font-semibold text-[10px] capitalize"><%= income.category %></span>
+                </td>
+                <td class="py-3.5 px-5 text-slate-400 font-medium"><%= new Date(income.regDate).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) %></td>
+                <td class="py-3.5 px-5 text-right font-extrabold text-emerald-500">+₦<%= income.amount.toLocaleString() %></td>
+                <td class="py-3.5 px-5 text-center">
+                    <a href="receipt?id=<%= income._id %>" class="inline-block text-[11px] font-bold bg-[#10b981] text-white px-2.5 py-1 rounded transition-all">
+                        View
+                    </a>
+                </td>
+            </tr>
+        <% }) %>
+       
+    <% } %>
 </tbody>
 </table>
                 </div>

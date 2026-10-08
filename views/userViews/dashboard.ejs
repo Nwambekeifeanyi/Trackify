@@ -44,6 +44,7 @@
 </head>
 <body class="h-screen flex overflow-hidden bg-slate-50">
 
+    <% var context %>
     <!-- ================================== narvbar ============================================= -->
  <!-- nav bar -->
     <%- include('../snippets/navbar.ejs') %>
@@ -54,80 +55,134 @@
 
         <main class="flex-grow p-6 overflow-y-auto custom-scrollbar space-y-6">
             
-            <section class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div class="p-4 bg-white border border-slate-200/80 rounded-xl shadow-sm flex items-center justify-between">
-                    <div>
-                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Total Allocation</p>
-                        <h3 class="text-xl font-extrabold text-slate-900 tracking-tight mt-0.5">₦250,000.00</h3>
-                        <span class="text-[10px] text-emerald-500 font-bold"><i class="fa-solid fa-arrow-up-long"></i> +12.4% This cycle</span>
-                    </div>
-                    <div class="p-3 bg-emerald-50 rounded-xl text-emerald-500"><i class="fa-solid fa-building-columns text-base"></i></div>
-                </div>
-                <div class="p-4 bg-white border border-slate-200/80 rounded-xl shadow-sm flex items-center justify-between">
-                    <div>
-                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Spent Overhead</p>
-                        <h3 class="text-xl font-extrabold text-slate-900 tracking-tight mt-0.5">₦84,230.15</h3>
-                        <span class="text-[10px] text-indigo-500 font-bold"><i class="fa-solid fa-chart-line"></i> 33.6% Burn rate</span>
-                    </div>
-                    <div class="p-3 bg-indigo-50 rounded-xl text-indigo-500"><i class="fa-solid fa-money-bill-transfer text-base"></i></div>
-                </div>
-                <div class="p-4 bg-white border border-slate-200/80 rounded-xl shadow-sm flex items-center justify-between">
-                    <div>
-                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Remaining Float</p>
-                        <h3 class="text-xl font-extrabold text-slate-900 tracking-tight mt-0.5">₦165,769.85</h3>
-                        <span class="text-[10px] text-slate-500 font-bold"><i class="fa-solid fa-shield-halved"></i> Stable configuration</span>
-                    </div>
-                    <div class="p-3 bg-slate-100 rounded-xl text-slate-600"><i class="fa-solid fa-vault text-base"></i></div>
-                </div>
-            </section>
+           <% if (context.this_user) { %>
+    <section class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        
+        <div class="p-4 bg-white border border-slate-200/80 rounded-xl shadow-sm flex items-center justify-between">
+            <div>
+                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Total Allocation</p>
+                <h3 class="text-xl font-extrabold text-slate-900 tracking-tight mt-0.5">
+                    ₦<%= Number(context.this_user.income || 0).toLocaleString('en-NG', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) %>
+                </h3>
+                <span class="text-[10px] text-emerald-500 font-bold"><i class="fa-solid fa-arrow-up-long"></i> +12.4% This cycle</span>
+            </div>
+            <div class="p-3 bg-emerald-50 rounded-xl text-emerald-500"><i class="fa-solid fa-building-columns text-base"></i></div>
+        </div>
+        
+        <div class="p-4 bg-white border border-slate-200/80 rounded-xl shadow-sm flex items-center justify-between">
+            <div>
+                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Spent Overhead</p>
+                <h3 class="text-xl font-extrabold text-slate-900 tracking-tight mt-0.5">
+                    ₦<%= Number(context.this_user.expenditure || 0).toLocaleString('en-NG', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) %>
+                </h3>
+                <span class="text-[10px] text-indigo-500 font-bold">
+                    <i class="fa-solid fa-chart-line"></i> 
+                    <%= context.this_user.income > 0 ? ((context.this_user.expenditure / context.this_user.income) * 100).toFixed(1) : 0 %>% Burn rate
+                </span>
+            </div>
+            <div class="p-3 bg-indigo-50 rounded-xl text-indigo-500"><i class="fa-solid fa-money-bill-transfer text-base"></i></div>
+        </div>
+        
+        <div class="p-4 bg-white border border-slate-200/80 rounded-xl shadow-sm flex items-center justify-between">
+            <div>
+                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Remaining Float</p>
+                <h3 class="text-xl font-extrabold text-slate-900 tracking-tight mt-0.5">
+                    ₦<%= Number(context.this_user.balance || 0).toLocaleString('en-NG', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) %>
+                </h3>
+                <span class="text-[10px] text-slate-500 font-bold"><i class="fa-solid fa-shield-halved"></i> Stable configuration</span>
+            </div>
+            <div class="p-3 bg-slate-100 rounded-xl text-slate-600"><i class="fa-solid fa-vault text-base"></i></div>
+        </div>
+        
+    </section>
+<% } %>
 
             <section class="grid grid-cols-1 lg:grid-cols-5 gap-6">
                 
-                <div class="lg:col-span-3 p-5 bg-white border border-slate-200/80 rounded-xl shadow-sm flex flex-col justify-between h-80">
-                    <div class="mb-2">
-                        <div class="flex items-center justify-between">
-                            <h3 class="text-xs font-bold text-slate-900 uppercase tracking-wide">Active Budget Thresholds</h3>
-                            <span class="text-[9px] bg-amber-50 text-amber-600 border border-amber-200 px-2 py-0.5 rounded-md font-bold uppercase tracking-wide animate-pulse">
-                                <i class="fa-solid fa-triangle-exclamation mr-1"></i> Cap Warnings Active
-                            </span>
-                        </div>
-                        <p class="text-[11px] text-slate-400">Current allocation ceilings vs realistic resource drain</p>
-                    </div>
+                <% 
+  // Map internal database category keys to UI presentation models
+  const categoryConfigs = {
+     'academic': { title: 'Academic, Research & Training', icon: 'fa-book', baseColor: 'indigo' },
+     'subsistence': { title: 'Food & Subsistence Utilities', icon: 'fa-burger', baseColor: 'amber' },
+     'infrastructure': { title: 'Network & Infrastructure Labs', icon: 'fa-wifi', baseColor: 'emerald' },
+     'housing & rent': { title: 'Housing & Workspace Leases', icon: 'fa-house-chimney', baseColor: 'purple' },
+     'utilities': { title: 'Power, Water & Public Utilities', icon: 'fa-bolt', baseColor: 'orange' },
+     'logistics': { title: 'Logistics & Transportation', icon: 'fa-car', baseColor: 'blue' },
+     'healthcare': { title: 'Medical, Wellness & Insurance', icon: 'fa-heart-pulse', baseColor: 'rose' },
+     'marketing': { title: 'Marketing, Ads & Client Outreach', icon: 'fa-rectangle-ad', baseColor: 'lightBlue' },
+     'legal & taxes': { title: 'Taxes, Levies & Legal Overhead', icon: 'fa-scale-balanced', baseColor: 'violet' },
+     'other': { title: 'Miscellaneous Overhead', icon: 'fa-tags', baseColor: 'slate' }
+  };
 
-                    <div class="flex-grow overflow-y-auto custom-scrollbar space-y-4 pr-1 mt-2">
-                        
-                        <div class="space-y-1.5">
-                            <div class="flex justify-between items-center text-xs">
-                                <span class="font-bold text-slate-700 flex items-center gap-1.5"><i class="fa-solid fa-book text-indigo-500 text-[10px]"></i> Academic & Research Materials</span>
-                                <span class="text-slate-500 font-medium"><span class="text-slate-900 font-bold">₦35,000</span> / ₦50,000</span>
-                            </div>
-                            <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                                <div class="bg-indigo-500 h-full rounded-full transition-all duration-500" style="width: 70%"></div>
-                            </div>
-                        </div>
+  // Determine if any category has exceeded safe parameters (> 85% spent)
+  let systemCapWarningActive = false;
+  if (context.budgets && context.budgets.length > 0) {
+     systemCapWarningActive = context.budgets.some(b => ((b.spent / b.limit) * 100) >= 85);
+  }
+%>
 
-                        <div class="space-y-1.5">
-                            <div class="flex justify-between items-center text-xs">
-                                <span class="font-bold text-slate-700 flex items-center gap-1.5"><i class="fa-solid fa-burger text-amber-500 text-[10px]"></i> Food & Subsistence Utilities</span>
-                                <span class="text-amber-600 font-bold"><i class="fa-solid fa-circle-exclamation mr-0.5"></i> ₦28,400 <span class="text-slate-400 font-normal">/ ₦30,000</span></span>
-                            </div>
-                            <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                                <div class="bg-amber-500 h-full rounded-full transition-all duration-500" style="width: 94.6%"></div>
-                            </div>
-                        </div>
+<div class="lg:col-span-3 p-5 bg-white border border-slate-200/80 rounded-xl shadow-sm flex flex-col justify-between h-80">
+    
+    <div class="mb-2">
+        <div class="flex items-center justify-between">
+            <h3 class="text-xs font-bold text-slate-900 uppercase tracking-wide">Active Budget Thresholds</h3>
+            
+            <% if (systemCapWarningActive) { %>
+                <span class="text-[9px] bg-rose-50 text-rose-600 border border-rose-200 px-2 py-0.5 rounded-md font-bold uppercase tracking-wide animate-pulse">
+                    <i class="fa-solid fa-triangle-exclamation mr-1"></i> Cap Warnings Active
+                </span>
+            <% } else { %>
+                <span class="text-[9px] bg-emerald-50 text-emerald-600 border border-emerald-200 px-2 py-0.5 rounded-md font-bold uppercase tracking-wide">
+                    <i class="fa-solid fa-circle-check mr-1"></i> Limits Stable
+                </span>
+            <% } %>
+        </div>
+        <p class="text-[11px] text-slate-400">Current allocation ceilings vs realistic resource drain</p>
+    </div>
 
-                        <div class="space-y-1.5">
-                            <div class="flex justify-between items-center text-xs">
-                                <span class="font-bold text-slate-700 flex items-center gap-1.5"><i class="fa-solid fa-wifi text-emerald-500 text-[10px]"></i> Network & Infrastructure Labs</span>
-                                <span class="text-slate-500 font-medium"><span class="text-slate-900 font-bold">₦12,000</span> / ₦40,000</span>
-                            </div>
-                            <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                                <div class="bg-emerald-500 h-full rounded-full transition-all duration-500" style="width: 30%"></div>
-                            </div>
-                        </div>
-
-                    </div>
+    <div class="flex-grow overflow-y-auto custom-scrollbar space-y-4 pr-1 mt-2">
+        
+        <% context.budgets.forEach(budget => { 
+            const config = categoryConfigs[budget.category] || { title: budget.category, icon: 'fa-tags', baseColor: 'slate' };
+            const spent = budget.spent;
+            const limit = budget.limit;
+            let percent = Math.min(((spent / limit) * 100), 100);
+            
+            // Adjust colors based on percentage spent thresholds
+            let statusColor = config.baseColor;
+            if (percent >= 90) statusColor = 'rose';
+            else if (percent >= 75) statusColor = 'amber';
+        %>
+            <div class="space-y-1.5">
+                <div class="flex justify-between items-center text-xs">
+                    <span class="font-bold text-slate-700 flex items-center gap-1.5">
+                        <i class="fa-solid <%= config.icon %> text-<%= statusColor %>-500 text-[10px]"></i> 
+                        <%= config.title %>
+                    </span>
+                    
+                    <% if (percent >= 85) { %>
+                        <span class="text-<%= statusColor %>-600 font-bold">
+                            <i class="fa-solid fa-circle-exclamation mr-0.5"></i> 
+                            ₦<%= spent.toLocaleString('en-NG') %> 
+                            <span class="text-slate-400 font-normal">/ ₦<%= limit.toLocaleString('en-NG') %></span>
+                        </span>
+                    <% } else { %>
+                        <span class="text-slate-500 font-medium">
+                            <span class="text-slate-900 font-bold">₦<%= spent.toLocaleString('en-NG') %></span> 
+                            / ₦<%= limit.toLocaleString('en-NG') %>
+                        </span>
+                    <% } %>
                 </div>
+                
+                <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                    <div class="bg-<%= statusColor %>-500 h-full rounded-full transition-all duration-500" 
+                         style="width: <%= percent.toFixed(1) %>%"></div>
+                </div>
+            </div>
+        <% }); %>
+
+    </div>
+</div>
 
                 <div class="lg:col-span-2 p-5 bg-white border border-slate-200/80 rounded-xl shadow-sm flex flex-col justify-between h-80">
                     <div class="mb-3">
@@ -136,36 +191,39 @@
                     </div>
 
                     <div class="flex-grow overflow-y-auto custom-scrollbar space-y-2.5 pr-1">
-                        <div class="flex items-center justify-between p-2 rounded-lg bg-slate-50/80 border border-slate-100">
-                            <div class="flex items-center gap-2.5">
-                                <div class="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-500 flex items-center justify-center text-xs"><i class="fa-solid fa-burger"></i></div>
-                                <div>
-                                    <h5 class="text-xs font-bold text-slate-800 leading-none">Campus Cafe</h5>
-                                    <span class="text-[9px] text-slate-400 font-medium">Food & Subsist</span>
+
+                        <% if (context.recents) { %>
+
+                            <% context.recents.forEach(recent => { %>
+                                <div class="flex items-center justify-between p-2 rounded-lg bg-slate-50/80 border border-slate-100">
+                                    <div class="flex items-center gap-2.5">
+                                        <div class="w-7 h-7 rounded-lg flex items-center justify-center text-xs 
+    <%= recent.type === 'expense' ? 'bg-rose-50 text-rose-500' : 
+        recent.type === 'campus' ? 'bg-indigo-50 text-indigo-500' : 
+        'bg-emerald-50 text-emerald-500' %>">
+        
+    <% if (recent.type === 'expense') { %>
+        <i class="fa-solid fa-receipt text-sm"></i>
+    <% } else if (recent.type === 'campus') { %>
+        <i class="fa-solid fa-graduation-cap text-sm"></i>
+    <% } else { %>
+        <i class="fa-solid fa-wallet text-sm"></i>
+    <% } %>
+</div>
+                                        <div>
+                                            <h5 class="text-xs font-bold text-slate-800 leading-none capitalize"><%= recent.source %></h5>
+                                            <span class="text-[9px] text-slate-400 font-medium"><%= recent.category ==='not assigned'? recent.session : recent.category%></span>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs font-bold text-slate-900">
+    <%= (recent.type === 'expense' || recent.type === 'campus') ? '-' : '' %>₦<%= recent.amount.toLocaleString('en-NG', { minimumFractionDigits: 2 }) %>
+</span>
                                 </div>
-                            </div>
-                            <span class="text-xs font-bold text-slate-900">-₦3,400</span>
-                        </div>
-                        <div class="flex items-center justify-between p-2 rounded-lg bg-slate-50/80 border border-slate-100">
-                            <div class="flex items-center gap-2.5">
-                                <div class="w-7 h-7 rounded-lg bg-indigo-50 text-indigo-500 flex items-center justify-center text-xs"><i class="fa-solid fa-book"></i></div>
-                                <div>
-                                    <h5 class="text-xs font-bold text-slate-800 leading-none">Research Materials</h5>
-                                    <span class="text-[9px] text-slate-400 font-medium">Academic Unit</span>
-                                </div>
-                            </div>
-                            <span class="text-xs font-bold text-slate-900">-₦12,500</span>
-                        </div>
-                        <div class="flex items-center justify-between p-2 rounded-lg bg-slate-50/80 border border-slate-100">
-                            <div class="flex items-center gap-2.5">
-                                <div class="w-7 h-7 rounded-lg bg-slate-100 text-slate-500 flex items-center justify-center text-xs"><i class="fa-solid fa-bolt"></i></div>
-                                <div>
-                                    <h5 class="text-xs font-bold text-slate-800 leading-none">Server Instance</h5>
-                                    <span class="text-[9px] text-slate-400 font-medium">Infrastructure</span>
-                                </div>
-                            </div>
-                            <span class="text-xs font-bold text-slate-900">-₦8,100</span>
-                        </div>
+                             
+                            <% }) %>
+                         
+                        <% } %>
+                      
                     </div>
                 </div>
             </section>
